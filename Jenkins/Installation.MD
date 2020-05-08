@@ -71,6 +71,19 @@ http://YOUR-SERVER-PUBLIC-IP:8080
   - `Manage Jenkins` > `Global Tool Configuration` > `JDK`  
 - Create another admin user id
 
+### Run shell command in jenkins as root user
+ 1. Open up the this script (using VIM or other editor)
+ 	vim /etc/sysconfig/jenkins
+ 2.  Find this $JENKINS_USER and change to “root”:
+ 	$JENKINS_USER="root"
+ 3. Then change the ownership of Jenkins home, webroot and logs:
+ 	chown -R root:root /var/lib/jenkins
+	chown -R root:root /var/cache/jenkins
+	chown -R root:root /var/log/jenkins
+ 4. Restart Jenkins and check the user has been changed:
+ 	service jenkins restart
+	ps -ef | grep jenkins
+
 ### Test Jenkins Jobs
 1. Create “new item”
 1. Enter an item name – `My-First-Project`
